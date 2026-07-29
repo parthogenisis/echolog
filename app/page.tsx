@@ -1,18 +1,17 @@
-import { supabase } from "@/lib/supabase/client";
-
-export default async function Home() {
-  const { data, error } = await supabase
-    .from("transmissions")
-    .select("*");
-
-  console.log(data);
-  console.log(error);
-
+export default function Home() {
   return (
-    <main className="min-h-screen bg-[#07121d] text-white p-10">
-      <h1 className="text-4xl font-bold mb-8">EchoLog</h1>
+    <main className="min-h-screen flex items-center justify-center bg-[#07121d] text-white">
+      <div className="text-center">
+        <h1 className="text-5xl font-bold">EchoLog</h1>
 
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+        <p className="mt-6">
+          URL: {process.env.NEXT_PUBLIC_SUPABASE_URL ? "✅ Loaded" : "❌ Missing"}
+        </p>
+
+        <p>
+          Key: {process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ? "✅ Loaded" : "❌ Missing"}
+        </p>
+      </div>
     </main>
   );
 }
