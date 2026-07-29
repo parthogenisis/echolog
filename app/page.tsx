@@ -1,32 +1,37 @@
-import { getTransmissions } from "@/lib/transmissions";
+import Link from "next/link";
 
-export default async function Home() {
-  const transmissions = await getTransmissions();
-
+export default function Home() {
   return (
-    <main className="min-h-screen bg-[#07121d] text-white p-10">
-      <h1 className="text-4xl font-bold mb-8">EchoLog</h1>
+    <main className="min-h-screen bg-[#07121d] text-white flex items-center justify-center">
+      <div className="text-center max-w-xl">
 
-      {transmissions.length === 0 ? (
-        <p>No transmissions yet.</p>
-      ) : (
-        transmissions.map((log) => (
-          <div
-            key={log.id}
-            className="mb-6 rounded-lg border border-gray-700 p-5"
+        <h1 className="text-6xl font-bold mb-4">
+          EchoLog
+        </h1>
+
+        <p className="text-gray-400 mb-10">
+          Your personal journal for thoughts, memories and video logs.
+        </p>
+
+        <div className="flex flex-col gap-4">
+
+          <Link
+            href="/new"
+            className="rounded-lg bg-blue-600 px-8 py-4 hover:bg-blue-700 transition"
           >
-            <h2 className="text-2xl font-semibold">{log.title}</h2>
+            ➕ New Transmission
+          </Link>
 
-            <p className="mt-2 text-gray-300">
-              {log.description}
-            </p>
+          <Link
+            href="/dashboard"
+            className="rounded-lg border border-gray-600 px-8 py-4 hover:bg-[#102030] transition"
+          >
+            📜 View Transmissions
+          </Link>
 
-            <p className="mt-4 text-sm text-gray-500">
-              {log.log_date}
-            </p>
-          </div>
-        ))
-      )}
+        </div>
+
+      </div>
     </main>
   );
 }
